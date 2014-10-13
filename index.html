@@ -1,288 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>   
-    <link href="styles/bootstrap.min.css" rel="Stylesheet" type="text/css" />
-	<link href="styles/bootstrap-responsive.min.css" rel="Stylesheet" type="text/css" />
-	<script type="text/javascript" src="scripts/jquery.js"></script>
-	<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+---
+layout: default
+title: Home
+---
 
-	<style>
-	.viewoptions a
-	{
-	font-size:16px;
-	color: #000;
-	}
-	.nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus{
-	color: #08abff;
-	}
-	.nav-tabs>li>a{padding:10px 15px; color: #08abff;}
-	.mainContent { padding-top: 128px; }
-	@media screen and (max-width: 979px) {
-		.mainContent { padding-top: 0px; }
-		
-		
-	}
-		.nav-list-affixed{top:5px; margin:5px; width:280px}
-		.hide{display:none;}
-		.iframe-rwd  {
-		position: relative;
-		padding-bottom: 35.25%;
-		padding-top: 30px;
-		height: 0;
-		overflow: hidden;
-		}
+<div class="posts">
+  {% for post in paginator.posts %}
+  <article class="post">
+    <h1 class="post-title">
+      <a href="{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h1>
 
-			@media screen and (max-width: 979px) {
-		.iframe-rwd { padding-bottom: 45.25%; }
-		
-	}
-	@media screen and (max-width: 768px) {
-    .iframe-rwd { padding-bottom: 65.25%; }
-}
-		.iframe-rwd iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		}
-		.no-margin-left{
-		margin-left:0;
-		}
-		.product-item:hover{background:#cfcfcf;}
-	</style>
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+    <time datetime="{{ post.date | date_to_xmlschema }}" class="post-date">{{ post.date | date_to_string }}</time>
 
-    <script>
-var map;
-function initialize() {
-  var mapOptions = {
-    zoom: 12,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-	center: new google.maps.LatLng(30.332184,-81.655651),
+    {{ post.content }}
+  </article>
+  {% endfor %}
+</div>
 
-  };
-  map = new google.maps.Map(document.getElementById('iframe-rwd'),
-      mapOptions);
-	      var infowindow = new google.maps.InfoWindow({
-      maxWidth: 190
-    });
-    var points = [
-      ['<b>Felicia Cat</b><br/>1975 Catcondo Drive, Unit 1220 Jacksonville, FL 32246<br/><b>4.5 mi</b>', 30.332184,-81.661],
-      ['<b>Doug Dog</b><br/>152 Doghouse Avenue, Unit 526 Jacksonville, FL 32246<br/><b>2.7 mi</b>', 30.332184,-81.655651]
-    ];
-	var marker;
-    var markers = new Array();
-    for (var i = 0; i < points.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(points[i][1], points[i][2]),
-        map: map
-      });
-
-      markers.push(marker);
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(points[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
-  /*
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Your current location'
-      });
-
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-	
-  }*/
-
-}
-
-/*function handleNoGeolocation(errorFlag) {
-  if (errorFlag) {
-    var content = 'The Geolocation service failed.';
-  } else {
-    var content = 'Your browser doesn\'t support geolocation.';
-  }
-
-  var options = {
-    map: map,
-    position: new google.maps.LatLng(60, 105),
-    content: content
-  };
-
-  var infowindow = new google.maps.InfoWindow(options);
-  map.setCenter(options.position);
-}*/
-
-google.maps.event.addDomListener(window, 'load', initialize);
-
-    </script>
-</head>
-<body class="">
-<script type="text/javascript">
-$(document).ready(function() {
-  $(".mapview").click(function(){
-	$('.map').show();
-	$('.list').hide();
-	$('.viewoptions').removeClass('active');
-	$(this).addClass('active');
-});
-  $(".listview").click(function(){
-	$('.map').hide();
-	$('.list').show();
-	$('.viewoptions').removeClass('active');
-	$(this).addClass('active');
-});
-  $(".maplistview").click(function(){
-	$('.map').show();
-	$('.list').show();
-	$('.viewoptions').removeClass('active');
-	$(this).addClass('active');
-});
-  $(".advancedsearch").click(function(){
-
-	$('.advancedsearchopt').toggle();
-	var text = $('advancedsearchopt').text();
-var text = $('.advancedsearch').text();
-    $('.advancedsearch').text(
-        text == "More Search Options" ? "Less Search Options" : "More Search Options");
-
-});
-
-	$('.product-item').click(function(){
-		$(this).find('.more-info').toggle();
-	});
-});
-</script>
-	<div class="navbar navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-search"></span>
-          </button>
-			<a class="brand hidden-phone span12" style="color:#08abff; font-size:22px;" href="#"><img src="img/search-blue.png" alt="" /><b>Find a Dentist</b></a>
-          <div class="nav-collapse collapse">
-		  <div class="row-fluid" style="margin-top:10px;">
-		  <div class="span5">
-		  <input name="q" class="span12" type="text"  placeholder="Name: Ruby, Dale, Alvin" >
-		  </div>
-		  <div class="span5">
-		  <input name="loc" class="span12" type="text"  placeholder="Location: City, State, Zip">
-		  </div>
-			  <div class="span2">
-				  <button type="submit" class="span12 btn btn-primary" style="margin-top:0px;"> Search</button>
-			  </div>
-		  </div>
-		<div class="row-fluid">
-		  <div class="span6 advancedsearchopt" style="display:none;">
-			Languages:
-			  <div class="control-group">
-					<label class="checkbox inline">
-					  <input type="checkbox" id="inlineCheckbox1" value="option1"> English
-					</label>
-					<label class="checkbox inline">
-					  <input type="checkbox" id="inlineCheckbox2" value="option2"> Spanish
-					</label>
-					<label class="checkbox inline">
-					  <input type="checkbox" id="inlineCheckbox3" value="option3"> French
-					</label>
-			  </div>
-		  </div>
-		  <div class="span6 advancedsearchopt" style="display:none;">
-		  <label>Search Radius:</label>
-		  
-		  <select>
-			  <option>10</option>
-			  <option>20</option>
-			  <option>30</option>
-			  <option>40</option>
-			  <option>50</option>
-			</select>
-		  </div>
-		  <div class="span12">
-			<div class="text-center"><a href="#" class="advancedsearch">More Search Options</a></div>
-		  </div>
-
-		</div>
-          </div>
-        </div>
-      </div>
-    </div>
-	<div class="container mainContent">
-		<div class="row-fluid">
-		  <div class="span12">	  
-		  <ul class="nav nav-tabs">
-			  <li class="mapview viewoptions">
-				<a href="#"><img src="img/globe_small_blue.png" alt="" /><span class="hidden-phone">Map</span></a>
-			  </li>
-			  <li class="listview viewoptions"><a href="#"><img src="img/list_small_blue.png" alt="" /><span class="hidden-phone">List</span></a></li>
-			  <li class="active maplistview viewoptions"><a href="#"><img src="img/mixed_small_blue.png" alt="" /><span class="hidden-phone">Mixed</span></a></li>
-			</ul>
-		  </div>
-		</div>
-		<div class="map row-fluid">
-			<div class="span12">
-				<div id="iframe-rwd" class="iframe-rwd">
-				<!--
-				<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Jacksonville,+FL&amp;aq=1&amp;oq=jacksonville&amp;sll=34.751928,-92.131378&amp;sspn=7.209557,9.876709&amp;ie=UTF8&amp;hq=&amp;hnear=Jacksonville,+Duval,+Florida&amp;ll=30.332184,-81.655651&amp;spn=0.473447,0.617294&amp;t=m&amp;z=11&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Jacksonville,+FL&amp;aq=1&amp;oq=jacksonville&amp;sll=34.751928,-92.131378&amp;sspn=7.209557,9.876709&amp;ie=UTF8&amp;hq=&amp;hnear=Jacksonville,+Duval,+Florida&amp;ll=30.332184,-81.655651&amp;spn=0.473447,0.617294&amp;t=m&amp;z=11" style="color:#0000FF;text-align:left">View Larger Map</a></small>
-				-->
-				</div>
-			</div>
-
-		</div>
-		<div class="list row-fluid">
-			<div class="span12">
-				<div class="product-item row-fluid"  style="padding:5px 0px; border-bottom:1px solid rgb(209, 209, 209);">
-					<div class="span12" style="font-family:Georgia, serif; font-size:16px; font-weight:bold;">Dog, Doug</div>
-					<div class="row-fluid">
-					<div class="span12" style="font-size:12px;">
-					<b>Address:</b> 152 Doghouse Avenue, Unit 526 Jacksonville, FL 32246<br/>
-					<b>Phone:</b> (904)382-7167<br/>
-					<span class="more-info" style="display:none;"><b>Sex:</b> M <b>Age:</b> 5 <b>Accepts New Patients</b></span>
-					</div>
-					</div>
-				</div>
-				<div class="product-item row-fluid"  style="padding:5px 0px; border-bottom:1px solid rgb(209, 209, 209);">
-					<div class="span12" style="font-family:Georgia, serif; font-size:16px; font-weight:bold;">Cat, Felicia</div>
-					<div class="row-fluid">
-					<div class="span12" style="font-size:12px;">
-					<b>Address:</b> 1975 Catcondo Drive, Unit 1220 Jacksonville, FL 32246<br/>
-					<b>Phone:</b> (904)382-1245<br/>
-					<span class="more-info" style="display:none;"><b>Sex:</b> F <b>Age:</b> 12 <b>Accepts New Patients</b> <i>Endodontist</i></span>
-					</div>
-					</div>
-				</div>	
-			</div>
-			<div class="span12">
-				<div class="pagination text-center">
-				  <ul>
-					<li><a href="#">«</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">»</a></li>
-				  </ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
-</html>
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ site.baseurl }}page{{paginator.next_page}}">Older</a>
+  {% else %}
+    <span class="pagination-item older">Older</span>
+  {% endif %}
+  {% if paginator.previous_page %}
+    {% if paginator.page == 2 %}
+      <a class="pagination-item newer" href="{{ site.baseurl }}">Newer</a>
+    {% else %}
+      <a class="pagination-item newer" href="{{ site.baseurl }}page{{paginator.previous_page}}">Newer</a>
+    {% endif %}
+  {% else %}
+    <span class="pagination-item newer">Newer</span>
+  {% endif %}
+</div>
