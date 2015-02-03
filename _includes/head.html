@@ -1,26 +1,78 @@
 <head>
-  <meta charset="UTF-8">
-  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="stylesheet" href="{{ "/css/bootstrap.css" | prepend: site.baseurl }}" >
+  <link rel="stylesheet" href="{{ "/css/custom.css" | prepend: site.baseurl }}" >
+  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}" >
 
-  <title>
-    {% if page.title == "Home" %}
-      {{ site.title }} &middot; {{ site.tagline }}
-    {% else %}
-      {{ page.title }} &middot; {{ site.title }}
-    {% endif %}
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="{{ site.baseurl }}public/css/poole.css">
-  <link rel="stylesheet" href="{{ site.baseurl }}public/css/syntax.css">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="{{ site.baseurl }}public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ site.baseurl }}atom.xml">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<style>
+		.post-outer {
+		line-height:2em;
+		margin-bottom:10px;
+		padding:10px
+		}
+		.post-preview {
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 30px;
+		}
+		.post-preview>h2>a {
+		color:#404040
+		}
+		.post-main-home-title  {
+		font-size: 30px;
+		margin-bottom: 20px;
+		margin-top: 10px;
+		}
+		.post-subtitle {
+		font-family:'open_sansregular','Helvetica Neue',Helvetica,Arial,sans-serif;
+		margin: 0;
+		font-weight: 400;
+		margin-bottom: 20px;
+		font-size: 16px;
+		}
+		.h-title-container{
+		  margin:0px;
+		}
+		.h-title {
+		color:#fff;
+		font-weight:800;
+		font-size:20px;
+		letter-spacing:2px;
+		margin:15px 5px;
+		}
+		.h-subtitle {
+		font-family:'open_sansregular','Helvetica Neue',Helvetica,Arial,sans-serif;
+		color:#fff;
+		font-weight:400;
+		font-size:16px;
+		}
+		h1,h2,h3,h4,h5,h6 {
+		font-family:'open_sansextrabold','Helvetica Neue',Helvetica,Arial,sans-serif;
+		font-weight:800
+		}
+		.navbar-inverse .navbar-nav > li > a{color:#fff;}
+		.navbar-inverse{
+			background-color:#485053;
+			border-color:#485053;
+		}
+		.post-meta{
+			font-family:'open_sansregular','Helvetica Neue',Helvetica,Arial,sans-serif;
+			font-weight: 400;
+			font-size: 14px;
+		}
+		body{padding-top:52px;
+}
+		</style>
 </head>
