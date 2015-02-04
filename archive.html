@@ -6,12 +6,12 @@ permalink: /archive/
 <div class="container">
 <div class="row">
 
-  <h2>Archive</h2>
+  <h2 style="margin-bottom:20px;">Archive</h2>
 
-  <ul class="post-list" style="padding-left:0;">
+  <ul class="" style="padding-left:0; list-style":none;">
     {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }} {{ post.title }}</span>
+      <li style="margin-bottom:10px;">
+        <a href="{{ post.url | prepend: site.baseurl }}"><span class="post-meta">{{ post.date | date: "%b %-d, %Y" }} {{ post.title }}</span></a>
       </li>
     {% endfor %}
   </ul>
